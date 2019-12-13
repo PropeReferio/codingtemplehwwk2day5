@@ -1,22 +1,3 @@
-#Your parking gargage class should have the following methods:
-#- takeTicket
-#- This should decrease the amount of tickets available by 1
-#- This should decrease the amount of parkingSpaces available by 1
-#- payForParking
-#- Display an input that waits for an amount from the user and store it in a variable
-#- If the payment variable is not empty then -> display a message to the user that their ticket has been paid and they have 15mins to leave
-#- This should update the "currentTicket" dictionary key "paid" to True
-#- leaveGarage
-#- If the ticket has been paid, display a message of "Thank You, have a nice day"
-#- If the ticket has not been paid, display an input prompt for payment
-#- Once paid, display message "Thank you, have a nice day!"
-#- Update parkingSpaces list to increase by 1
-#- Update tickets list to increase by 1
-
-#You will need a few attributes as well:
-#- tickets -> integer
-#- parkingSpaces -> list of str numbers
-#- currentTicket -> dictionary
 import random
 
 class ParkingGarage():
@@ -44,9 +25,8 @@ class ParkingGarage():
                 print('Sorry, that space is not available.')
         number = self.tickets.pop()# 4 digit number pops off of randomly generated list
         print('Your ticket # is ' + number + '. Please save it for reference.')
-        self.currentTicket[number] = [False, self.parkingSpaces.pop(self.parkingSpaces.index(space))] #Use remove and append if it doesn't work
+        self.currentTicket[number] = [False, self.parkingSpaces.pop(self.parkingSpaces.index(space))]
         print('Please pay your ticket when ready.')
-        #Need pop method to move parking space # from list to dictionary
 
     def payForParking(self):
         number = input('What is your ticket number? ')
@@ -56,7 +36,7 @@ class ParkingGarage():
             else:
                 print('Your space is number ' + self.currentTicket[number][1] + '.')
                 payment = input('$2.40/hr. How much would you like to pay? ')
-                if '$' in payment:
+                if '$' in payment: #Ensures that $ is in user input
                     print('Ticket has been paid, thank you. You have 15 minutes to leave.')
                     self.currentTicket[number][0] = True
                 else:
@@ -70,15 +50,10 @@ class ParkingGarage():
             print('Your space is number ' + self.currentTicket[number][1] + '.')
             if self.currentTicket[number][0] is True:
                 print('Your ticket has been paid and you may leave. Thank you, have a nice day!')
-                self.parkingSpaces.append(self.currentTicket[number][1])
-                self.tickets.append(number)
-                del self.currentTicket[number]
+                self.parkingSpaces.append(self.currentTicket[number][1]) 
+                self.tickets.append(number) #Moves space number and ticket # back to list of spaces
+                del self.currentTicket[number] #deletes the ticket from the dictionary
             else:
                 print('You have not yet paid. Please do so.')
         except:
             print('That ticket number does not exist.')
-    #- If the ticket has been paid, display a message of "Thank You, have a nice day"
-#- If the ticket has not been paid, display an input prompt for payment
-#- Once paid, display message "Thank you, have a nice day!"
-#- Update parkingSpaces list to increase by 1
-#- Update tickets list to increase by 1
