@@ -32,9 +32,9 @@ class ParkingGarage():
         number = input('What is your ticket number? ')
         try:
             if self.currentTicket[number][0] is True:
-                'Your ticket has already been paid.'
+                '\nYour ticket has already been paid.'
             else:
-                print('Your space is number ' + self.currentTicket[number][1] + '.')
+                print('\nYour space is number ' + self.currentTicket[number][1] + '.')
                 payment = input('$2.40/hr. How much would you like to pay? ')
                 if '$' in payment: #Ensures that $ is in user input
                     print('Ticket has been paid, thank you. You have 15 minutes to leave.')
@@ -49,7 +49,7 @@ class ParkingGarage():
         try:
             print('Your space is number ' + self.currentTicket[number][1] + '.')
             if self.currentTicket[number][0] is True:
-                print('Your ticket has been paid and you may leave. Thank you, have a nice day!')
+                print('\nYour ticket has been paid and you may leave. Thank you, have a nice day!')
                 self.parkingSpaces.append(self.currentTicket[number][1]) 
                 self.tickets.append(number) #Moves space number and ticket # back to list of spaces
                 del self.currentTicket[number] #deletes the ticket from the dictionary
@@ -57,3 +57,18 @@ class ParkingGarage():
                 print('You have not yet paid. Please do so.')
         except:
             print('That ticket number does not exist.')
+
+bo_park = ParkingGarage()
+
+while True:
+    response = input('\nWhat would you like to do? You can:\nPark and take a \
+ticket by typing "park," \nPay for parking with "pay,"\nexit the garage \
+with "exit,"\nLeave this program with "end." ')
+    if response == 'end':
+        break
+    if response == 'park':
+        bo_park.takeTicket()
+    if response == 'pay':
+        bo_park.payForParking()
+    if response == 'exit':
+        bo_park.leaveGarage()
